@@ -120,9 +120,15 @@ public class Main {
     }
 
     private static boolean getPlayerGuess(Scanner keyboard, String wordToGuess, ArrayList<Character> playerGuesses) {
-        System.out.println("Please enter a letter:");
+        System.out.println("Please enter a letter or 'hint' to show one character:");
         String letterGuess = keyboard.nextLine();
-        playerGuesses.add(letterGuess.charAt(0));
+        if (letterGuess.equalsIgnoreCase("hint")) {
+            Random random = new Random();
+            playerGuesses.add(wordToGuess.charAt((random.nextInt(wordToGuess.length()))));
+        }
+        else {
+            playerGuesses.add(letterGuess.charAt(0));
+        }
 
         return wordToGuess.contains(letterGuess);
     }
